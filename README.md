@@ -12,3 +12,29 @@
 この時，ガウス分布の平均は0，標準偏差は高度に比例する．
 ![風速ノイズモデル](https://github.com/Jirouken/RocketSimuMC/blob/master/wind_noise01001.png)
 さらに，風向にもガウス分布から生成されるノイズを加える(additive noise)．
+
+## usage
+~~~
+from RocketSimuMC import RocketSimuMC
+import pandas as pd
+
+# 設計データ読み込み
+design = pd.read_csv('design.csv')
+# 打ち上げ条件読み込み
+condition = pd.read_csv('condition.csv')
+
+# モンテカルロシミュレーション
+rs = RocketSimuMC()
+rs.initialize(design.loc[0], condition.loc[2])
+fr, ma = rs.falling_range(n=1000)
+
+print(ma.mean(), ma.std())
+
+plt.figure(figsize=(8, 8))
+plt.scatter(fr[:, 0], fr[:, 1])
+plt.xlabel('x', fontsize=20)
+plt.ylabel('y', fontsize=20)
+plt.xticks(fontsize=15)
+plt.yticks(fontsize=15)
+plt.show()
+~~~
