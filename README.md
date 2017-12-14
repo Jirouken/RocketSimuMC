@@ -1,6 +1,7 @@
 # RocketSimuMC
 ロケットが弾道飛行した際の落下範囲をモンテカルロシミュレーションにより推定する．
 ![落下分布](https://github.com/Jirouken/RocketSimuMC/blob/master/dist.png)
+上図星印は発射位置．風速ノイズは標準偏差0.1.左図は風向ノイズの標準偏差0.1，右図は風向ノイズの標準偏差1．
 
 ## description
 #### モンテカルロシミュレーション
