@@ -7,4 +7,9 @@
 [ロケットシミュレーション](https://github.com/Jirouken/ModelRocketSimulator)において確率的に生じる風向・風速の揺らぎを乱数によって再現し，多数シミュレーションを行うことで落下範囲の分布を得る．
 
 #### 風速モデル
-風速モデルは，基準高さ$$z_R$$における基準風速$$w_R$$を用いて高度$$z$$における風速$$w(z)$$は次式のような[べき法則](https://www.rikanenpyo.jp/kaisetsu/kisyo/kisyo_011.html)で表される．
+風速モデルは，基準高さ$z_R$における基準風速$w_R$を用いて高度$z$における風速$w(z)$は次式のような[べき法則](https://www.rikanenpyo.jp/kaisetsu/kisyo/kisyo_011.html)で表される．
+```math
+\begin{eqnarray}
+w(z) = w_R \left( \frac{z}{z_R} \right)^{\frac{1}{7}}
+\end{eqnarray}
+```
