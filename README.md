@@ -1,5 +1,6 @@
 # RocketSimuMC
 ロケットが弾道飛行した際の落下範囲をモンテカルロシミュレーションにより推定する．
+![落下分布](https://github.com/Jirouken/RocketSimuMC/blob/master/dist.png)
 
 ## description
 #### モンテカルロシミュレーション
@@ -17,6 +18,9 @@
 ~~~
 from RocketSimuMC import RocketSimuMC
 import pandas as pd
+from matplotlib import pyplot as plt
+from matplotlib import mlab
+from sklearn.mixture import GaussianMixture
 
 # 設計データ読み込み
 design = pd.read_csv('design.csv')
@@ -30,11 +34,28 @@ fr, ma = rs.falling_range(n=1000)
 
 print(ma.mean(), ma.std())
 
+# ガウシアンフィッティング
+n_components = 1
+gm = GaussianMixture(n_components, covariance_type='full')
+gm.fit(fr)
+
+xx = np.linspace(-7.0, 7.0, 200)
+yy = np.linspace(-5.0, 5.0, 200)
+X, Y = np.meshgrid(xx, yy)
+
+Z = mlab.bivariate_normal(X, Y, np.sqrt(gm.covariances_[0][0][0]), np.sqrt(gm.covariances_[0][1][1]),
+                          gm.means_[0][0], gm.means_[0][1], gm.covariances_[0][0][1])
+
 plt.figure(figsize=(8, 8))
-plt.scatter(fr[:, 0], fr[:, 1])
-plt.xlabel('x', fontsize=20)
-plt.ylabel('y', fontsize=20)
+plt.scatter(0, 0, label='launch complex', marker='*', c='r', s=100)
+plt.scatter(fr[:, 0], fr[:, 1], alpha=0.5, s=10)
+plt.xlim(-20, 20)
+plt.ylim(-90, 2)
+CS = plt.contour(X, Y, Z11)
+plt.clabel(CS, inline=1, fontsize=10)
 plt.xticks(fontsize=15)
 plt.yticks(fontsize=15)
+plt.xlabel('x', fontsize=20)
+plt.ylabel('y', fontsize=20)
 plt.show()
 ~~~
