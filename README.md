@@ -10,4 +10,5 @@
 シミュレーションで用いる風速モデルは[べき法則](https://www.rikanenpyo.jp/kaisetsu/kisyo/kisyo_011.html)で表される．
 これにガウス分布から生成されるノイズを加える(multiplicative noise)．
 この時，ガウス分布の平均は0，標準偏差は高度に比例する．
+![風速ノイズモデル](https://github.com/Jirouken/RocketSimuMC/blob/master/wind_noise01001.png)
 さらに，風向にもガウス分布から生成されるノイズを加える(additive noise)．
