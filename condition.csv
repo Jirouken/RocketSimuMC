@@ -1,0 +1,4 @@
+,WindDirection,density,launch_rod,name,azimuthal,AngleOfFire,StandardWind,StandardHeight
+0,-1.5707963,1.29,1,condition1,0,0.087266,2,1
+1,0,1.29,1,condition2,0,0,0,1
+2,-1.5707963,1.29,1,condition3,0,0,5,1
