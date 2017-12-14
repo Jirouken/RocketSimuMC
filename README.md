@@ -35,7 +35,7 @@ condition = pd.read_csv('condition.csv')
 # モンテカルロシミュレーション
 rs = RocketSimuMC()
 rs.initialize(design.loc[0], condition.loc[2])
-fr, ma = rs.falling_range(n=1000)
+fr, ma = rs.falling_range(n=1000, sd_w=0.1, sd_b=1)
 
 print(ma.mean(), ma.std())
 
